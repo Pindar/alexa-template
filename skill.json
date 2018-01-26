@@ -25,6 +25,13 @@
       "category": "EDUCATION_AND_REFERENCE",
       "distributionCountries": []
     },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "ask-custom-alexa-template-default"
+        }
+      }
+    },
     "manifestVersion": "1.0",
     "privacyAndCompliance": {
       "allowsPurchases": false,
