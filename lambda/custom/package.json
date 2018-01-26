@@ -6,7 +6,7 @@
     "dev-env": "cp -f .dev.env .env",
     "prod-env": "cp -f .prod.env .env",
     "show-stage": "export $(cat .env | xargs) && echo ${STAGE}",
-    "test": "export $(cat .test.env | xargs) && sls webpack -o testBuild && sls invoke test --root testBuild/service --stage dev",
+    "test": "export $(cat .test.env | xargs) && sls webpack -o .webpack/ && sls invoke test --root .webpack/service --stage dev",
     "deploy": "export $(cat .env | xargs) && sls deploy --verbose",
     "deployfunction": "export $(cat .env | xargs) && sls deploy function --function skill",
     "remove": "export $(cat .env | xargs) && sls remove",

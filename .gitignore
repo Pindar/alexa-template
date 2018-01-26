@@ -18,5 +18,3 @@ jspm_packages
 .webpack
 npm-debug.log
 
-# test build
-testBuild/
