@@ -22,6 +22,17 @@ Now you can create a new skill project in the current directory.
 $ ask new --template GettingStarted --url https://raw.githubusercontent.com/Pindar/alexa-template/master/templates.json --skill-name my_new_skill
 ```
 
+**Note**
+There is a bug in version `ask-cli@1.0.0-beta.9`. To fix it please open `/usr/local/lib/node_modules/ask-cli/lib/new/git-templates.js:152` and change the following:
+```js
+if (apis[domain][key].endpoint || apis[domain][key].endpoint.uri) {
+```
+to 
+```js
+if (apis[domain][key].endpoint && apis[domain][key].endpoint.uri) {
+```
+
+
 You need to download NodeJS dependencies:
 
 ```bash
