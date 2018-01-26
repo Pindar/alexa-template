@@ -12,12 +12,7 @@
             "custom": {
               "endpoint": {
                 "uri": "ask-custom-alexa-template-default"
-              },
-              "interfaces": [
-                {
-                  "type": "AUDIO_PLAYER"
-                }
-              ]
+              }
             }
           }
         }
