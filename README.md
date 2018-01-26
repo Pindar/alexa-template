@@ -16,7 +16,13 @@ $ ask init
 
 You need an [AWS account](https://aws.amazon.com) and an [Amazon developer account](https://developer.amazon.com) to create an Alexa Skill.
 
-You need to download NodeJS dependencies :
+Now you can create a new skill project in the current directory.
+
+```bash
+$ ask new --template https://raw.githubusercontent.com/Pindar/alexa-template/master/templates.json --skill-name my_new_skill
+```
+
+You need to download NodeJS dependencies:
 
 ```bash
 $ (cd lambda/custom && npm install)
@@ -26,6 +32,9 @@ $ (cd lambda/custom && npm install)
 
 ### Deploy to AWS
 
+**Preperation**
+
+Create your `.[test|dev|prod].env` files based on `lambda/custom/.env.example`. You can add more configuration there and reference it in `serverless.yml` or in the js function.
 
 **First: Deploy Lambda**
 
@@ -37,7 +46,7 @@ $ cd lambda/custom && npm run [dev|prod]-env
 ```bash
 $ npm run deploy
 ```
-3. From the provided output of the last command copy the value of `SkillLambdaFunctionQualifiedArn` without colon and the number in the end and paste it to the URI in `.ask/config`.
+3. From the provided output of the last command copy the value of `SkillLambdaFunctionQualifiedArn` stripping off colon plus number (`:1`) and paste it as URI value in `.ask/config`.
 
 **Second: Deploy Skill**
 
