@@ -1,56 +1,37 @@
 const Alexa = require('alexa-sdk');
-const Console = console;
+const stateHandlers = require('./src/state-handlers');
+const languageStrings = require('./src/language-strings/languages');
+const Logger = require('./src/util/logger');
+
 
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
 
-exports.handler = (event, context) => {
-  const alexa = Alexa.handler(event, context);
+exports.handler = (event, context, callback) => {
+  callback = debugOutput(event, context, callback);
+
+  const alexa = Alexa.handler(event, context, callback);
   alexa.appId = process.env.SKILL_APP_ID;
-  alexa.registerHandlers(handlers);
+  alexa.debug = process.env.DEBUG;
+  alexa.resources = languageStrings;
+
+  alexa.registerHandlers(stateHandlers);
+
   alexa.execute();
 };
 
-const handlers = {
-  'LaunchRequest': function () {
-    this.emit('SayHello');
-  },
-  'HelloWorldIntent': function () {
-    this.emit('SayHello');
-  },
-  'MyNameIsIntent': function () {
-    this.emit('SayHelloName');
-  },
-  'SayHello': function () {
-    this.response.speak('Hello World!')
-      .cardRenderer('hello world', 'hello world');
-    this.emit(':responseReady');
-  },
-  'SayHelloName': function () {
-    var name = this.event.request.intent.slots.name.value;
-    this.response.speak('Hello ' + name)
-      .cardRenderer('hello world', 'hello ' + name);
-    this.emit(':responseReady');
-  },
-  'SessionEndedRequest' : function() {
-    Console.log('Session ended with reason: ' + this.event.request.reason);
-  },
-  'AMAZON.StopIntent' : function() {
-    this.response.speak('Bye');
-    this.emit(':responseReady');
-  },
-  'AMAZON.HelpIntent' : function() {
-    this.response.speak('You can try: \'alexa, hello world\' or \'alexa, ask hello world my' +
-    ' name is awesome Aaron\'');
-    this.emit(':responseReady');
-  },
-  'AMAZON.CancelIntent' : function() {
-    this.response.speak('Bye');
-    this.emit(':responseReady');
-  },
-  'Unhandled' : function() {
-    this.response.speak('Sorry, I didn\'t get that. You can try: \'alexa, hello world\'' +
-    ' or \'alexa, ask hello world my name is awesome Aaron\'');
+function debugOutput(event, context, callback) {
+  if (process.env.DEBUG !== 'true') {
+    return;
   }
-};
+  Logger.debug('\n' + '******************* REQUEST **********************');
+  Logger.debug('\n' + JSON.stringify(event, null, 2));
+
+  var origCallback = callback;
+  return function (error, response) {
+    Logger.debug('\n' + '******************* RESPONSE  **********************');
+    Logger.debug('\n' + JSON.stringify(response, null, 2));
+    return origCallback(error, response);
+  };
+}
