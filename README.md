@@ -19,7 +19,7 @@ You need an [AWS account](https://aws.amazon.com) and an [Amazon developer accou
 Now you can create a new skill project in the current directory.
 
 ```bash
-$ ask new --template https://raw.githubusercontent.com/Pindar/alexa-template/master/templates.json --skill-name my_new_skill
+$ ask new --template GettingStarted --url https://raw.githubusercontent.com/Pindar/alexa-template/master/templates.json --skill-name my_new_skill
 ```
 
 You need to download NodeJS dependencies:
