@@ -92,6 +92,12 @@
       "resolved": "https://registry.npmjs.org/align-text/-/align-text-0.1.4.tgz",
       "dev": true
     },
+    "amdefine": {
+      "version": "1.0.1",
+      "from": "amdefine@>=0.0.4",
+      "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.1.tgz",
+      "dev": true
+    },
     "ansi": {
       "version": "0.3.1",
       "from": "ansi@>=0.3.1 <0.4.0",
@@ -2843,6 +2849,26 @@
       "resolved": "https://registry.npmjs.org/har-validator/-/har-validator-5.0.3.tgz",
       "dev": true
     },
+    "hard-source-webpack-plugin": {
+      "version": "0.5.16",
+      "from": "https://registry.npmjs.org/hard-source-webpack-plugin/-/hard-source-webpack-plugin-0.5.16.tgz",
+      "resolved": "https://registry.npmjs.org/hard-source-webpack-plugin/-/hard-source-webpack-plugin-0.5.16.tgz",
+      "dev": true,
+      "dependencies": {
+        "rimraf": {
+          "version": "2.6.2",
+          "from": "rimraf@>=2.6.2 <3.0.0",
+          "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.6.2.tgz",
+          "dev": true
+        },
+        "source-list-map": {
+          "version": "0.1.8",
+          "from": "source-list-map@>=0.1.6 <0.2.0",
+          "resolved": "https://registry.npmjs.org/source-list-map/-/source-list-map-0.1.8.tgz",
+          "dev": true
+        }
+      }
+    },
     "has": {
       "version": "1.0.1",
       "from": "has@>=1.0.1 <2.0.0",
@@ -3208,6 +3234,12 @@
       "version": "1.0.1",
       "from": "is-path-inside@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/is-path-inside/-/is-path-inside-1.0.1.tgz",
+      "dev": true
+    },
+    "is-plain-obj": {
+      "version": "1.1.0",
+      "from": "is-plain-obj@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/is-plain-obj/-/is-plain-obj-1.1.0.tgz",
       "dev": true
     },
     "is-posix-bracket": {
@@ -3894,6 +3926,12 @@
           "dev": true
         }
       }
+    },
+    "node-object-hash": {
+      "version": "1.3.0",
+      "from": "node-object-hash@>=1.2.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/node-object-hash/-/node-object-hash-1.3.0.tgz",
+      "dev": true
     },
     "normalize-package-data": {
       "version": "2.4.0",
@@ -4824,6 +4862,12 @@
       "resolved": "https://registry.npmjs.org/sntp/-/sntp-2.1.0.tgz",
       "dev": true
     },
+    "sort-keys": {
+      "version": "2.0.0",
+      "from": "sort-keys@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/sort-keys/-/sort-keys-2.0.0.tgz",
+      "dev": true
+    },
     "source-list-map": {
       "version": "2.0.0",
       "from": "source-list-map@>=2.0.0 <3.0.0",
@@ -5502,6 +5546,26 @@
         }
       }
     },
+    "webpack-core": {
+      "version": "0.6.9",
+      "from": "webpack-core@>=0.6.0 <0.7.0",
+      "resolved": "https://registry.npmjs.org/webpack-core/-/webpack-core-0.6.9.tgz",
+      "dev": true,
+      "dependencies": {
+        "source-list-map": {
+          "version": "0.1.8",
+          "from": "source-list-map@~0.1.7",
+          "resolved": "https://registry.npmjs.org/source-list-map/-/source-list-map-0.1.8.tgz",
+          "dev": true
+        },
+        "source-map": {
+          "version": "0.4.4",
+          "from": "source-map@>=0.4.1 <0.5.0",
+          "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.4.4.tgz",
+          "dev": true
+        }
+      }
+    },
     "webpack-sources": {
       "version": "1.1.0",
       "from": "webpack-sources@>=1.0.1 <2.0.0",
@@ -5589,6 +5653,26 @@
       "from": "write-file-atomic@>=2.1.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/write-file-atomic/-/write-file-atomic-2.3.0.tgz",
       "dev": true
+    },
+    "write-json-file": {
+      "version": "2.3.0",
+      "from": "write-json-file@>=2.3.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/write-json-file/-/write-json-file-2.3.0.tgz",
+      "dev": true,
+      "dependencies": {
+        "detect-indent": {
+          "version": "5.0.0",
+          "from": "detect-indent@>=5.0.0 <6.0.0",
+          "resolved": "https://registry.npmjs.org/detect-indent/-/detect-indent-5.0.0.tgz",
+          "dev": true
+        },
+        "pify": {
+          "version": "3.0.0",
+          "from": "pify@>=3.0.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/pify/-/pify-3.0.0.tgz",
+          "dev": true
+        }
+      }
     },
     "xdg-basedir": {
       "version": "3.0.0",

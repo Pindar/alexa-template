@@ -30,6 +30,7 @@
     "eslint": "^4.16.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-mocha": "^4.11.0",
+    "hard-source-webpack-plugin": "https://registry.npmjs.org/hard-source-webpack-plugin/-/hard-source-webpack-plugin-0.5.16.tgz",
     "serverless": "^1.25.0",
     "serverless-mocha-plugin": "^1.7.0",
     "serverless-webpack": "^4.2.0",
@@ -40,11 +41,14 @@
   },
   "babel": {
     "presets": [
-        ["env", {
+      [
+        "env",
+        {
           "targets": {
             "node": "current"
           }
-        }]
+        }
       ]
-    }
+    ]
+  }
 }
