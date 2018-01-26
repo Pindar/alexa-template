@@ -28,7 +28,7 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "uri": "ask-custom-alexa-template-default"
+          "sourceDir": "lambda/custom"
         }
       }
     },
