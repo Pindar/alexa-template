@@ -1,6 +1,6 @@
-const Logger = require('./util/logger');
+import * as Logger from './util/logger';
 
-const handlers = {
+export default {
   'LaunchRequest'() {
     this.emit('SayHello');
   },
@@ -40,5 +40,3 @@ const handlers = {
     this.response.speak(this.t('UNHANDLED_MSG'));
   }
 };
-
-module.exports = handlers;

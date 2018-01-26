@@ -19,7 +19,7 @@ const en = {
   }
 };
 
-module.exports = {
+export default {
   'en-US': {
     translation: en
   }

@@ -17,3 +17,6 @@ jspm_packages
 # other
 .webpack
 npm-debug.log
+
+# test build
+testBuild/

@@ -6,7 +6,7 @@
     "dev-env": "cp -f .dev.env .env",
     "prod-env": "cp -f .prod.env .env",
     "show-stage": "export $(cat .env | xargs) && echo ${STAGE}",
-    "test": "export $(cat .test.env | xargs) && sls invoke test --stage dev",
+    "test": "export $(cat .test.env | xargs) && sls webpack -o testBuild && sls invoke test --root testBuild/service --stage dev",
     "deploy": "export $(cat .env | xargs) && sls deploy --verbose",
     "deployfunction": "export $(cat .env | xargs) && sls deploy function --function skill",
     "remove": "export $(cat .env | xargs) && sls remove",
@@ -17,10 +17,16 @@
     "deploy-skill": "ask deploy"
   },
   "dependencies": {
-    "alexa-sdk": "^1.0.0"
+    "alexa-sdk": "^1.0.0",
+    "babel-runtime": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.26.0.tgz"
   },
   "devDependencies": {
     "ask-cli": "^1.0.0-beta.9",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "eslint": "^4.16.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-mocha": "^4.11.0",
@@ -31,5 +37,14 @@
   },
   "engines": {
     "node": ">=6.10.0 <6.11"
-  }
+  },
+  "babel": {
+    "presets": [
+        ["env", {
+          "targets": {
+            "node": "current"
+          }
+        }]
+      ]
+    }
 }

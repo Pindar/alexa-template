@@ -1,14 +1,17 @@
-const Alexa = require('alexa-sdk');
-const stateHandlers = require('./src/state-handlers');
-const languageStrings = require('./src/language-strings/languages');
-const Logger = require('./src/util/logger');
+if (!global._babelPolyfill) {
+  require('babel-polyfill');
+}
+import * as Alexa from 'alexa-sdk';
+import stateHandlers from './src/state-handlers';
+import languageStrings from './src/language-strings/languages';
+import * as Logger from './src/util/logger';
 
 
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
 
-exports.handler = (event, context, callback) => {
+export const handler = (event, context, callback) => {
   callback = debugOutput(event, context, callback);
 
   const alexa = Alexa.handler(event, context, callback);

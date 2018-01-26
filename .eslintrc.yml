@@ -15,3 +15,5 @@ rules:
   semi:
     - error
     - always
+parserOptions:
+  sourceType: module
