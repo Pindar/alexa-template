@@ -1,0 +1,35 @@
+{
+  "name": "skill-sample-nodejs-hello-world",
+  "version": "1.0.0",
+  "description": "Hello world sample skill",
+  "scripts": {
+    "dev-env": "cp -f .dev.env .env",
+    "prod-env": "cp -f .prod.env .env",
+    "show-stage": "export $(cat .env | xargs) && echo ${STAGE}",
+    "test": "export $(cat .env | xargs) && sls invoke test --stage dev",
+    "deploy": "export $(cat .env | xargs) && sls deploy",
+    "deployfunction": "export $(cat .env | xargs) && sls deploy function --function skill",
+    "remove": "export $(cat .env | xargs) && sls remove",
+    "start": "export $(cat .env | xargs) && sls invoke --function skill",
+    "startlocal": "export $(cat .env | xargs) && sls invoke local --function skill",
+    "logs": "export $(cat .env | xargs) && sls logs --function skill -t",
+    "deploy-assets": "export $(cat .env | xargs) && aws s3 sync ./assets s3://${SKILL_FILE_STORAGE_BASE}-${STAGE}/ --delete",
+    "deploy-skill": "ask deploy"
+  },
+  "dependencies": {
+    "alexa-sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "ask-cli": "^1.0.0-beta.9",
+    "eslint": "^4.16.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "serverless": "^1.25.0",
+    "serverless-mocha-plugin": "^1.7.0",
+    "serverless-webpack": "^4.2.0",
+    "webpack": "^3.10.0"
+  },
+  "engines": {
+    "node": ">=6.10.0 <6.11"
+  }
+}

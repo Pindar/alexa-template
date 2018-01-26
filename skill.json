@@ -1,0 +1,37 @@
+{
+  "skillManifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "Sample Short Description",
+          "examplePhrases": [
+            "Alexa open hello world",
+            "Alexa tell hello world I am Jeff",
+            "Alexa tell hello world my name is Peter"
+          ],
+          "keywords": [
+            "training",
+            "template",
+            "hello",
+            "world"
+          ],
+          "smallIconUri": "https://raw.githubusercontent.com/Pindar/alexa-template/master/lambda/custom/assets/icons/icon_108.png",
+          "largeIconUri": "https://raw.githubusercontent.com/Pindar/alexa-template/master/lambda/custom/assets/icons/icon_512.png",
+          "name": "alexa-template",
+          "description": "Sample Full Description"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": []
+    },
+    "manifestVersion": "1.0",
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "isExportCompliant": true,
+      "containsAds": true,
+      "isChildDirected": false,
+      "usesPersonalInfo": false
+    }
+  }
+}

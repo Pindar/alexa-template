@@ -1,0 +1,15 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# alexa (needs to be made private if code is going public)
+# .ask
+
+.webpack
+
+# environment files
+.env
+lambda/custom/.env

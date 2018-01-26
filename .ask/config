@@ -1,0 +1,27 @@
+{
+  "deploy_settings": {
+    "default": {
+      "skill_id": "",
+      "was_cloned": false,
+      "merge": {
+        "skillManifest": {
+          "publishingInformation": {
+            "testingInstructions": "Sample Testing Instructions.",
+          },
+          "apis": {
+            "custom": {
+              "endpoint": {
+                "uri": "ask-custom-alexa-template-default"
+              },
+              "interfaces": [
+                {
+                  "type": "AUDIO_PLAYER"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+service: skill-sample-nodejs-hello-world
+
+plugins:
+  - serverless-webpack
+  - serverless-mocha-plugin
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stackTags:
+    APPLICATION: skill-sample-nodejs-hello-world
+    TYPE: skill
+
+  stage: ${env:STAGE, 'dev'}
+  region: ${env:AWS_REGION}
+  profile: ${env:AWS_PROFILE}
+  memorySize: ${env:AWS_MEMORY_SIZE:'256'}
+  cfLogs: true
+
+functions:
+  skill:
+    handler: index.handler
+    description: Alexa hello world skill
+    events:
+      - alexaSkill
+    environment:
+      DEBUG: ${env:DEBUG, 'true'}
+      NODE_ENV: ${env:NODE_ENV, 'dev'}
+      SKILL_FILE_STORAGE_BASE: ${env:SKILL_FILE_STORAGE_BASE}
+
+resources:
+  Resources:
+    SkillSampleBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${env:SKILL_FILE_STORAGE_BASE}-${self:provider.stage}
+        AccessControl: Private
+        CorsConfiguration:
+          CorsRules:
+          - AllowedMethods:
+              - GET
+            AllowedOrigins:
+              - http://ask-ifr-download.s3.amazonaws.com
+              - https://ask-ifr-download.s3.amazonaws.com
+    SkillSampleBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: SkillSampleBucket
+        PolicyDocument:
+          Statement:
+            - Action:
+                - 's3:GetObject'
+              Effect: Allow
+              Principal: '*'
+              Resource:
+                Fn::Join:
+                  - ''
+                  - - 'arn:aws:s3:::'
+                    - Ref: SkillSampleBucket
+                    - '/*'
