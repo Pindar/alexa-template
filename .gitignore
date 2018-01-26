@@ -6,10 +6,14 @@ jspm_packages
 .serverless
 
 # alexa (needs to be made private if code is going public)
-# .ask
-
-.webpack
+# as soon as you start coding and applying the correct ARN please make sure to make this file private
+.ask
 
 # environment files
 .env
-lambda/custom/.env
+# in a private repository you can commit all your environment variable files for each staging system
+.*.env
+
+# other
+.webpack
+npm-debug.log

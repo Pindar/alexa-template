@@ -7,6 +7,7 @@ const Console = console;
 
 exports.handler = (event, context) => {
   const alexa = Alexa.handler(event, context);
+  alexa.appId = process.env.SKILL_APP_ID;
   alexa.registerHandlers(handlers);
   alexa.execute();
 };

@@ -6,7 +6,7 @@
       "merge": {
         "skillManifest": {
           "publishingInformation": {
-            "testingInstructions": "Sample Testing Instructions.",
+            "testingInstructions": "Sample Testing Instructions."
           },
           "apis": {
             "custom": {

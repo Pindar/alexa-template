@@ -26,14 +26,8 @@ $ (cd lambda/custom && npm install)
 
 ### Deploy to AWS
 
-**Deploy Skill**
 
-```bash
-$ ask deploy --target skill
-$ ask deploy --target model
-```
-
-**Deploy Lambda**
+**First: Deploy Lambda**
 
 1. select staging environment 
 ```bash 
@@ -43,3 +37,13 @@ $ cd lambda/custom && npm run [dev|prod]-env
 ```bash
 $ npm run deploy
 ```
+3. From the provided output of the last command copy the value of `SkillLambdaFunctionQualifiedArn` without colon and the number in the end and paste it to the URI in `.ask/config`.
+
+**Second: Deploy Skill**
+
+```bash
+$ ask deploy --target skill
+$ ask deploy --target model
+```
+
+

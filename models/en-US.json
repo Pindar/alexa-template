@@ -17,6 +17,14 @@
           "samples": []
         },
         {
+          "name": "AMAZON.PauseIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ResumeIntent",
+          "samples": []
+        },
+        {
           "name":"HelloWorldIntent",
           "slots":[
 

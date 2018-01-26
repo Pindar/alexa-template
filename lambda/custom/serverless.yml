@@ -14,7 +14,7 @@ provider:
   stage: ${env:STAGE, 'dev'}
   region: ${env:AWS_REGION}
   profile: ${env:AWS_PROFILE}
-  memorySize: ${env:AWS_MEMORY_SIZE:'256'}
+  memorySize: ${env:AWS_MEMORY_SIZE, '256'}
   cfLogs: true
 
 functions:
@@ -27,6 +27,7 @@ functions:
       DEBUG: ${env:DEBUG, 'true'}
       NODE_ENV: ${env:NODE_ENV, 'dev'}
       SKILL_FILE_STORAGE_BASE: ${env:SKILL_FILE_STORAGE_BASE}
+      SKILL_APP_ID: ${env:SKILL_APP_ID}
 
 resources:
   Resources:
