@@ -595,7 +595,7 @@
     },
     "babel-register": {
       "version": "6.26.0",
-      "from": "babel-register@>=6.26.0 <7.0.0",
+      "from": "https://registry.npmjs.org/babel-register/-/babel-register-6.26.0.tgz",
       "resolved": "https://registry.npmjs.org/babel-register/-/babel-register-6.26.0.tgz",
       "dev": true
     },
