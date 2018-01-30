@@ -49,15 +49,11 @@ Create your `.[test|dev|prod].env` files based on `lambda/custom/.env.example`. 
 
 **First: Deploy Lambda**
 
-1. select staging environment 
-```bash 
-$ cd lambda/custom && npm run [dev|prod]-env
-```
-2. deploy to selected environment with
+1. deploy to specified environment with
 ```bash
-$ npm run deploy
+$ npm run deploy -- --stage [dev|production]
 ```
-3. From the provided output of the last command copy the value of `SkillLambdaFunctionQualifiedArn` stripping off colon plus number (`:1`) and paste it as URI value in `.ask/config`.
+2. From the provided output of the last command copy the value of `SkillLambdaFunctionQualifiedArn` stripping off colon plus number (`:1`) and paste it as URI value in `.ask/config`.
 
 **Second: Deploy Skill**
 

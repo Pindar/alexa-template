@@ -4,6 +4,8 @@ plugins:
   - serverless-webpack
   - serverless-mocha-plugin
 
+custom: ${file(./.env.${self:provider.stage}.yml)}
+
 provider:
   name: aws
   runtime: nodejs6.10
@@ -11,10 +13,10 @@ provider:
     APPLICATION: skill-sample-nodejs-hello-world
     TYPE: skill
 
-  stage: ${env:STAGE, 'dev'}
-  region: ${env:AWS_REGION}
-  profile: ${env:AWS_PROFILE}
-  memorySize: ${env:AWS_MEMORY_SIZE, '256'}
+  stage: ${opt:stage, 'dev'}
+  region: ${self:custom.AWS_REGION}
+  profile: ${self:custom.AWS_PROFILE}
+  memorySize: ${self:custom.AWS_MEMORY_SIZE, '256'}
   cfLogs: true
 
 functions:
@@ -24,17 +26,17 @@ functions:
     events:
       - alexaSkill
     environment:
-      DEBUG: ${env:DEBUG, 'true'}
-      NODE_ENV: ${env:NODE_ENV, 'dev'}
-      SKILL_FILE_STORAGE_BASE: ${env:SKILL_FILE_STORAGE_BASE}
-      SKILL_APP_ID: ${env:SKILL_APP_ID}
+      DEBUG: ${self:custom.DEBUG, 'true'}
+      NODE_ENV: ${self:custom.NODE_ENV, 'dev'}
+      SKILL_FILE_STORAGE_BASE: ${self:custom.SKILL_FILE_STORAGE_BASE}
+      SKILL_APP_ID: ${self:custom.SKILL_APP_ID}
 
 resources:
   Resources:
     SkillSampleBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${env:SKILL_FILE_STORAGE_BASE}-${self:provider.stage}
+        BucketName: ${self:custom.SKILL_FILE_STORAGE_BASE}-${self:provider.stage}
         AccessControl: Private
         CorsConfiguration:
           CorsRules:

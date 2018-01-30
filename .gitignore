@@ -10,9 +10,10 @@ jspm_packages
 .ask
 
 # environment files
-.env
 # in a private repository you can commit all your environment variable files for each staging system
-.*.env
+.env.dev.yml
+.env.test.yml
+.env.production.yml
 
 # other
 .webpack
