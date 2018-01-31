@@ -1,0 +1,22 @@
+{
+  "name": "alexa-template",
+  "version": "1.0.0",
+  "description": "This is an opinionated template for Alexa skill deployments. It provides everything you need to start professional development including the testing framework mocha.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "ask deploy --target skill && ask deploy --target model"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pindar/alexa-template.git"
+  },
+  "author": "Simon Dittlmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pindar/alexa-template/issues"
+  },
+  "homepage": "https://github.com/Pindar/alexa-template#readme",
+  "devDependencies": {
+    "ask-cli": "^1.0.0-beta.9"
+  }
+}
