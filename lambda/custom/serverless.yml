@@ -33,6 +33,10 @@ functions:
 
 resources:
   Resources:
+    SkillLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "30"
     SkillSampleBucket:
       Type: AWS::S3::Bucket
       Properties:
