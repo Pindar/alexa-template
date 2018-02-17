@@ -1,53 +1,38 @@
-const mochaPlugin = require('serverless-mocha-plugin');
-const expect = mochaPlugin.chai.expect;
-let wrapped = mochaPlugin.getWrapper('skill', '/index.js', 'handler');
-import { responseHelper } from './utils/alexa';
+// include the testing framework
+import alexaTest from 'alexa-skill-test-framework';
+import languageStrings from '../src/language-strings/languages';
 
-// import intents
-const launchRequestIntent = require('./service-requests/launch-request.json');
-const helloWorldIntent = require('./service-requests/hello-world-intent.json');
-const myNameIsIntent = require('./service-requests/my-name-is-intent.json');
+// initialize the testing framework
+alexaTest.initialize(
+  require('../index.js'),
+  'amzn1.ask.skill.00000000-0000-0000-0000-000000000000',
+  'amzn1.ask.account.VOID'
+);
+alexaTest.initializeI18N(languageStrings);
+alexaTest.setLocale('en-US');
 
 describe('skill', () => {
-  before((done) => {
-    done();
-  });
-
-  function helloWorldCheck(r) {
-    expect(responseHelper.getOutputSpeech(r)).to.be.equal('<speak> Hello World! </speak>');
-
-    expect(r.response.card).to.deep.equal({
-      content: 'hello world',
-      title: 'hello world',
-      type: 'Simple',
-    });
-
-    expect(r.response.shouldEndSession).to.be.true;
-  }
-
   it('implement hello world intent test', () => {
-    return wrapped.run(launchRequestIntent).then((r) => {
-      helloWorldCheck(r);
-    });
+    alexaTest.test([
+      {
+        request: alexaTest.getLaunchRequest(),
+        says: alexaTest.t('HELLO_MSG'),
+        hasCardTitle: alexaTest.t('CARD.DEFAULT.TITLE'),
+        hasCardContent: alexaTest.t('CARD.DEFAULT.CONTENT'),
+        shouldEndSession: false
+      }
+    ]);
   });
 
-  it('implement hello world intent test', () => {
-    return wrapped.run(helloWorldIntent).then((r) => {
-      helloWorldCheck(r);
-    });
-  });
-
-  it('implement my name is intent test', () => {
-    return wrapped.run(myNameIsIntent).then((r) => {
-      expect(responseHelper.getOutputSpeech(r)).to.be.equal('<speak> Hello name </speak>');
-
-      expect(r.response.card).to.deep.equal({
-        content: 'hello world',
-        title: 'hello world',
-        type: 'Simple',
-      });
-
-      expect(r.response.shouldEndSession).to.be.true;
-    });
+  describe('implement my name is intent test', () => {
+    const name = 'foobar';
+    alexaTest.test([
+      {
+        request: alexaTest.getIntentRequest('MyNameIsIntent', { name }),
+        says: alexaTest.t('HELLO_YOU_MSG', { name }),
+        hasCardTitle: alexaTest.t('CARD.PERSONALIZED.TITLE'),
+        hasCardContent: alexaTest.t('CARD.DEFAULT.CONTENT', {name}),
+      }
+    ]);
   });
 });
