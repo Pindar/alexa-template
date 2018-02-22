@@ -4,7 +4,7 @@ plugins:
   - serverless-webpack
   - serverless-mocha-plugin
 
-custom: ${file(./.env.${self:provider.stage}.yml)}
+custom: ${file(./.env.${opt:config, 'dev'}.yml)}
 
 provider:
   name: aws
@@ -26,9 +26,9 @@ functions:
     events:
       - alexaSkill
     environment:
-      DEBUG: ${self:custom.DEBUG, 'true'}
-      NODE_ENV: ${self:custom.NODE_ENV, 'dev'}
-      SKILL_FILE_STORAGE_BASE: ${self:custom.SKILL_FILE_STORAGE_BASE}
+      DEBUG: ${self:custom.DEBUG}
+      NODE_ENV: ${self:custom.NODE_ENV}
+      SKILL_FILE_STORAGE: ${self:custom.SKILL_FILE_STORAGE}
       SKILL_APP_ID: ${self:custom.SKILL_APP_ID}
 
 resources:
@@ -37,32 +37,3 @@ resources:
       Type: AWS::Logs::LogGroup
       Properties:
         RetentionInDays: "30"
-    SkillSampleBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: ${self:custom.SKILL_FILE_STORAGE_BASE}-${self:provider.stage}
-        AccessControl: Private
-        CorsConfiguration:
-          CorsRules:
-          - AllowedMethods:
-              - GET
-            AllowedOrigins:
-              - http://ask-ifr-download.s3.amazonaws.com
-              - https://ask-ifr-download.s3.amazonaws.com
-    SkillSampleBucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        Bucket:
-          Ref: SkillSampleBucket
-        PolicyDocument:
-          Statement:
-            - Action:
-                - 's3:GetObject'
-              Effect: Allow
-              Principal: '*'
-              Resource:
-                Fn::Join:
-                  - ''
-                  - - 'arn:aws:s3:::'
-                    - Ref: SkillSampleBucket
-                    - '/*'

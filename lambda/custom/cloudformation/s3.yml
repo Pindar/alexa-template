@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: S3 Asset Bucket
+Parameters:
+  SkillAssetBucket:
+    Description: Skill asset bucket name
+    Type: 'String'
+Resources:
+  SkillSampleBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref SkillAssetBucket
+      AccessControl: Private
+      CorsConfiguration:
+        CorsRules:
+        - AllowedMethods:
+            - GET
+          AllowedOrigins:
+            - http://ask-ifr-download.s3.amazonaws.com
+            - https://ask-ifr-download.s3.amazonaws.com
+  SkillSampleBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: SkillSampleBucket
+      PolicyDocument:
+        Statement:
+          - Action:
+              - 's3:GetObject'
+            Effect: Allow
+            Principal: '*'
+            Resource:
+              Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: SkillSampleBucket
+                  - '/*'

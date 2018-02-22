@@ -1,6 +1,6 @@
 # alexa-template
 
-This is an opinionates template for Alexa skill deployments. It provides everything you need to start professional development including the testing framework mocha.
+This is an opinionated template for Alexa skill development. It provides everything you need to start professional, test driven development right away.
 
 ## Development
 
@@ -22,21 +22,10 @@ Now you can create a new skill project in the current directory.
 $ ask new --template GettingStarted --url https://raw.githubusercontent.com/Pindar/alexa-template/master/templates.json --skill-name my_new_skill
 ```
 
-**Note**
-There is a bug in version `ask-cli@1.0.0-beta.9`. To fix it please open `/usr/local/lib/node_modules/ask-cli/lib/new/git-templates.js:152` and change the following:
-```js
-if (apis[domain][key].endpoint || apis[domain][key].endpoint.uri) {
-```
-to 
-```js
-if (apis[domain][key].endpoint && apis[domain][key].endpoint.uri) {
-```
-
-
 You need to download NodeJS dependencies:
 
 ```bash
-$ (npm install && cd lambda/custom && npm install)
+$ npm install
 ```
 
 *This repository requires a BASH command line interface.*
@@ -51,12 +40,96 @@ Create your `.env.[test|dev|prod].yml` files based on `lambda/custom/.env.exampl
 
 1. deploy to specified environment with
 ```bash
-$ cd $WORKINGDIR_ROOT/custom/lambda && npm run deploy -- --stage [dev|production]
+$ npm run deploy --prefix=custom/lambda -- --stage [green|blue] --config [dev|production]
 ```
 2. From the provided output of the last command copy the value of `SkillLambdaFunctionQualifiedArn` stripping off colon plus number (e.g., `:1`) and paste it as URI value in `.ask/config`.
 
 **Second: Deploy Skill**
 
 ```bash
-$  cd $WORKINGDIR_ROOT && npm run deploy
+$  npm run deploy
 ```
+
+## Deployment Strategy: Blue / Green
+
+To have a seamless blue/green deployment experience with Alexa skills all three layers are independently managed. 
+
+1. Alexa models and skill definition is deployed with ask-cli/Alexa Skill Management API (SMAPI)
+2. Lambda function is deployed with serverless framework
+3. Storage is deployed with aws-cli cloudformation templates
+
+
+V1: GREEN is Live, BLUE is in development
+
++--------------------+      +----------------+                +-----------------+
+|                    |      |                |                |                 |
+| Alexa Development  +------> Skill BLUE     +----------------> DynamoDB DEV    |
+|   models           |      |                |                |                 |
+|   skill            +----+ |                |                |                 |
++-+------------------+    | +----------------+                +-----------------+
+                          |
+                          |
++--------------------+    | +----------------+                +-----------------+
+|                    |    | |                |                |                 |
+| Alexa Live         +------> Skill GREEN    +----------------> DynamoDB Prod   |
+|   models           |    | |                |                |                 |
+|   skills           +-+  | |                |                |                 |
++-+------------------+ |  | +----------------+                +-----------------+
+                       |  |
+                       |  |                                   +-----------------+
+                       |  |                                   |                 |
+                       |  +-----------------------------------> S3 Assets Store |
+                       |                                      |                 |
+                       +-------------------------------------->                 |
+                                                              +-----------------+
+
+
+CERTIFICATION: BLUE connected to production database
+
++--------------------+      +----------------+                +-----------------+
+|                    |      |                |                |                 |
+| Alexa Development  +------> Skill BLUE     +----------+     | DynamoDB DEV    |
+|  models            |      |                |          |     |                 |
+|  skill             +----+ |                |          |     |                 |
++-+------------------+    | +----------------+          |     +-----------------+
+                          |                             |
+                          |                             |
++--------------------+    | +----------------+          |     +-----------------+
+|                    |    | |                |          +----->                 |
+| Alexa Live         +------> Skill GREEN    +----------------> DynamoDB PROD   |
+|  models            |    | |                |                |                 |
+|  skills            +-+  | |                |                |                 |
++-+------------------+ |  | +----------------+                +-----------------+
+                       |  |
+                       |  |                                   +-----------------+
+                       |  |                                   |                 |
+                       |  +-----------------------------------> S3 Assets Store |
+                       |                                      |                 |
+                       +-------------------------------------->                 |
+                                                              +-----------------+
+
+
+V2: BLUE is Live, GREEN is in development
+
+
++--------------------+      +----------------+                +-----------------+
+|                    |      |                |                |                 |
+| Alexa Live         +------> Skill BLUE     +----------+     | DynamoDB DEV    |
+|   models           |      |                |          |     |                 |
+|   skill            +----+ |                |     +---------->                 |
++-+------------------+    | +----------------+     |    |     +-----------------+
+                          |                        |    |
+                          |                        |    |
++--------------------+    | +----------------+     |    |     +-----------------+
+|                    |    | |                |     |    +----->                 |
+| Alexa Development  +------> Skill GREEN    +-----+          | DynamoDB PROD   |
+|   models           |    | |                |                |                 |
+|   skills           +-+  | |                |                |                 |
++-+------------------+ |  | +----------------+                +-----------------+
+                       |  |
+                       |  |                                   +-----------------+
+                       |  |                                   |                 |
+                       |  +-----------------------------------> S3 Assets Store |
+                       |                                      |                 |
+                       +-------------------------------------->                 |
+                                                              +-----------------+
