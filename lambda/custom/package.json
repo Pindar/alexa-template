@@ -10,7 +10,7 @@
     "start": "sls invoke --function skill",
     "startlocal": "sls invoke local --function skill",
     "logs": "sls logs --function skill -t",
-    "deploy-assets": "aws s3 sync ./assets s3://${SKILL_FILE_STORAGE_BASE}-${STAGE}/ --delete",
+    "deploy-assets": "aws s3 sync ./assets s3://${SKILL_FILE_STORAGE_BASE}/ --delete",
     "deploy-skill": "ask deploy"
   },
   "dependencies": {
