@@ -40,7 +40,7 @@ Create your `.env.[test|dev|prod].yml` files based on `lambda/custom/.env.exampl
 
 1. deploy to specified environment with
 ```bash
-$ npm run deploy --prefix=custom/lambda -- --stage [green|blue] --config [dev|production]
+$ npm run deploy --prefix=lambda/custom -- --stage [green|blue] --config [dev|production]
 ```
 2. From the provided output of the last command copy the value of `SkillLambdaFunctionQualifiedArn` stripping off colon plus number (e.g., `:1`) and paste it as URI value in `.ask/config`.
 
