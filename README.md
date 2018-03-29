@@ -87,7 +87,7 @@ V1: GREEN is Live, BLUE is in development
 
 
 CERTIFICATION: BLUE connected to production database
-<pre>
+```
 +--------------------+      +----------------+                +-----------------+
 |                    |      |                |                |                 |
 | Alexa Development  +------> Skill BLUE     +----------+     | DynamoDB DEV    |
@@ -109,11 +109,11 @@ CERTIFICATION: BLUE connected to production database
                        |                                      |                 |
                        +-------------------------------------->                 |
                                                               +-----------------+
-</pre>
+```
 
 V2: BLUE is Live, GREEN is in development
 
-<pre>
+```
 +--------------------+      +----------------+                +-----------------+
 |                    |      |                |                |                 |
 | Alexa Live         +------> Skill BLUE     +----------+     | DynamoDB DEV    |
@@ -135,4 +135,4 @@ V2: BLUE is Live, GREEN is in development
                        |                                      |                 |
                        +-------------------------------------->                 |
                                                               +-----------------+
-</pre>
+```
