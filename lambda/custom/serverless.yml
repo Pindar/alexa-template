@@ -27,7 +27,7 @@ functions:
       - alexaSkill
     environment:
       DEBUG: ${self:custom.DEBUG}
-      NODE_ENV: ${self:custom.NODE_ENV}
+      NODE_ENV: ${self:custom.NODE_ENV, 'dev'}
       SKILL_FILE_STORAGE: ${self:custom.SKILL_FILE_STORAGE}
       SKILL_APP_ID: ${self:custom.SKILL_APP_ID}
 

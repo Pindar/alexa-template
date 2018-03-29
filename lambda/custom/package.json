@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Hello world sample skill",
   "scripts": {
-    "test": "sls invoke test --compilers js:babel-register --stage test",
+    "test": "export BABEL_ENV=test && sls invoke test --compilers js:babel-register --stage test --config test",
     "deploy": "sls deploy --verbose",
     "deployfunction": "sls deploy function --function skill",
     "remove": "sls remove",

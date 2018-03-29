@@ -12,7 +12,6 @@ jspm_packages
 # environment files
 # in a private repository you can commit all your environment variable files for each staging system
 .env.dev.yml
-.env.test.yml
 .env.production.yml
 
 # other
